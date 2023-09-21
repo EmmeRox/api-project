@@ -2,20 +2,20 @@ const express = require("express");
 const app = express();
 const PORT = 5000;
 
-const savage = {
-  "21 Savage": {
+const rapper = {
+  "21 savage": {
     age: 29,
     birthname: "Sheyaa Bin Abraham-Joseph",
     birthlocation: "London, England",
   },
 
-  Chance: {
+  chance: {
     age: 29,
     birthname: "Chancelor Bennett",
     birthlocation: "Chicago, Illinois",
   },
 
-  Dylan: {
+  dylan: {
     age: 29,
     birthname: "Dylan",
     location: "Dylan",
@@ -27,8 +27,14 @@ app.get("/", (request, response) => {
   response.sendFile(__dirname + "/index.html"); //dirname is just start wherever the js file is and go to its html
 });
 
-app.get("/api", (request, response) => {
-  response.json(savage);
+app.get("/api/:rapperName", (request, response) => {
+  const rappersName = request.params.rapperName.toLowerCase();
+  if (rapper[rappersName]) {
+    response.json(rapper[rappersName]);
+  } else {
+    response.json(rapper["dylan"]);
+  }
+  //response.json(rappers);
 });
 
 app.listen(PORT, () => {
