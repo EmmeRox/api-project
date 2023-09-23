@@ -27,6 +27,7 @@ app.get("/", (request, response) => {
   response.sendFile(__dirname + "/index.html"); //dirname is just start wherever the js file is and go to its html
 });
 
+//the colon below in the url lets express know it is a query parameter, not actually part of the path
 app.get("/api/:rapperName", (request, response) => {
   const rappersName = request.params.rapperName.toLowerCase();
   if (rapper[rappersName]) {
