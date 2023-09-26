@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 const PORT = 5000;
+const cors = require("cors");
+
+app.use(cors());
 
 const rapper = {
   "21 savage": {
@@ -38,6 +41,7 @@ app.get("/api/:rapperName", (request, response) => {
   //response.json(rappers);
 });
 
-app.listen(PORT, () => {
+//listen first on the port (in this case) Heroku is trying to use first. If non-existent, use the one we defined above
+app.listen(process.env.PORT || PORT, () => {
   console.log(`The server is running on ${PORT}`);
 });
